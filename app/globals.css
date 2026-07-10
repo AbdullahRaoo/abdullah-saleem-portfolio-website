@@ -1,0 +1,203 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens.
+
+   The page is cool and neutral in both themes, and exactly one warm color
+   (--signal, a deep brass) is spent on actions. On an otherwise cool page the
+   only warm thing owns the eye. That reservation is the conversion mechanic,
+   and it is what both themes are built to protect.
+
+   Brass rather than a bright amber: bright amber is a caution color (terminals,
+   alert dashboards, traffic signals), which is the wrong association for a page
+   whose job is to make someone feel safe hiring.
+
+   Two signal tokens, because one hue cannot do both jobs across both themes:
+
+     --signal         a FILL. Buttons and graph nodes. Always brass, so the
+                      brand mark stays constant. Text on it is --signal-ink.
+     --signal-strong  a TEXT color. Brass text on near-white is about 2.1:1 and
+                      fails WCAG AA outright, so in light mode this darkens to a
+                      deep bronze (4.8:1) while the button fill stays brass.
+
+   Dark is the default; light is opt-in via [data-theme="light"] (set before
+   paint by the inline script in layout.tsx).
+--------------------------------------------------------------------------- */
+@theme {
+  --color-ink: #0b0d12;
+  --color-surface: #141821;
+  --color-line: #232a38;
+  --color-text: #eceff4;
+  --color-muted: #8b94a6;
+
+  --color-signal: #d2a24c;
+  --color-signal-hover: #e0b160;
+  --color-signal-active: #b98b3c;
+  --color-signal-ink: #0b0d12;
+  /* 8.4:1 on --ink. Safe as text in dark mode. */
+  --color-signal-strong: #d2a24c;
+
+  --font-display: var(--font-chivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-libre-franklin), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian-mono), ui-monospace, "SF Mono", monospace;
+}
+
+:root {
+  color-scheme: dark;
+
+  /*
+    Client screenshots are bright, saturated light-mode UIs, and one of them is
+    full-colour illustration. Untreated they out-shout the CTA, which breaks the
+    single rule the design rests on. In dark mode they are darkened and drained;
+    in light mode darkening would look broken, so they are only drained and
+    veiled in white. Both lift on hover, when the card is what is being weighed.
+  */
+  --media-filter: brightness(0.6) contrast(1.06) saturate(0.5);
+  --media-filter-hover: brightness(0.85) contrast(1.06) saturate(0.95);
+  --media-veil: rgb(11 13 18 / 0.35);
+  --media-scrim: linear-gradient(
+    to top right,
+    rgb(11 13 18 / 0.8),
+    rgb(11 13 18 / 0.2) 55%,
+    transparent
+  );
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --color-ink: #f5f6f8;
+  --color-surface: #ffffff;
+  --color-line: #e1e5ec;
+  --color-text: #0e1218;
+  /* 5.6:1 on --ink, 6.0:1 on --surface. */
+  --color-muted: #5c6473;
+
+  /* Fill stays brass so the brand mark is constant across themes. */
+  --color-signal: #d2a24c;
+  --color-signal-hover: #c08d33;
+  --color-signal-active: #a97a2a;
+  --color-signal-ink: #0b0d12;
+  /* Deep bronze. 4.8:1 on --ink, so it clears AA as body-size text. */
+  --color-signal-strong: #7a5312;
+
+  --media-filter: saturate(0.55) contrast(1.02);
+  --media-filter-hover: saturate(1) contrast(1);
+  --media-veil: rgb(255 255 255 / 0.28);
+  --media-scrim: linear-gradient(
+    to top right,
+    rgb(245 246 248 / 0.7),
+    rgb(245 246 248 / 0.15) 55%,
+    transparent
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Nav is sticky; keep anchor targets clear of it. */
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-text);
+    font-family: var(--font-sans);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    /* Prevent horizontal creep from the wide hero graph at small widths. */
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-signal-ink);
+  }
+
+  /* One visible, high-contrast focus ring everywhere. Keyboard only, so it
+     never fights the hover states, but it is always present when tabbing. */
+  :focus-visible {
+    outline: 2px solid var(--color-signal-strong);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Reduced motion is a hard requirement, not a nicety. Freeze the pulse,
+     hold the graph static, and let reveals resolve to their final state. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+
+  /*
+    Martian Mono is a wide face. Its own width already reads as "label", so the
+    tracking stays modest. Pushing it further overflows long mono strings on a
+    360px screen.
+  */
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  /* Hairline that reads as a wire, not a newspaper rule: it fades at both
+     ends so it never looks like broadsheet furniture. */
+  .wire-rule {
+    background-image: linear-gradient(
+      to right,
+      transparent,
+      var(--color-line) 12%,
+      var(--color-line) 88%,
+      transparent
+    );
+  }
+
+  /* Theme-driven screenshot treatment. See the --media-* tokens above. */
+  .media-img {
+    filter: var(--media-filter);
+    transition: filter 500ms ease;
+  }
+
+  .media-veil {
+    background-color: var(--media-veil);
+    transition: opacity 500ms ease;
+  }
+
+  .media-scrim {
+    background-image: var(--media-scrim);
+  }
+
+  .group:hover .media-img {
+    filter: var(--media-filter-hover);
+  }
+
+  .group:hover .media-veil {
+    opacity: 0;
+  }
+}
