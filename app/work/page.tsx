@@ -6,6 +6,7 @@ import { ProjectCard } from "@/components/project-card";
 import { Footer } from "@/components/sections/footer";
 import { Reveal } from "@/components/ui/reveal";
 import { allWork } from "@/lib/projects";
+import { documentedWork } from "@/lib/stats";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -35,8 +36,8 @@ export default function WorkIndexPage() {
         </h1>
         <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
           Platforms, business sites and storefronts, the automation between them, and the computer
-          vision systems. {allWork.length} projects, each with what it is, what it took and what it
-          changed.
+          vision systems. {documentedWork} of them written up properly here, out of 120+ shipped:
+          what each one is, what it took, and what it changed.
         </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
