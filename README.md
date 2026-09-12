@@ -56,11 +56,15 @@ Every page is prerendered; the only server route is `POST /api/contact`.
    | A | *(blank)* | the IP on Vercel's domain card |
    | CNAME | `www` | the per-project target on Vercel's domain card |
 
-   **Delete the A record name.com ships by default first.** The apex currently
-   points at `91.195.240.94`, a name.com parking page. Leaving it in place
-   gives the apex two conflicting A records and Vercel will report an invalid
-   configuration. Check that name.com URL forwarding is off for the apex too,
-   since it overrides DNS.
+   An empty record list at name.com is normal. The apex still resolves to
+   `91.195.240.94` because name.com answers for it by default (their parking
+   and URL-forwarding infrastructure), not because a record exists for you to
+   delete. Your records take over once they are added. Do check **Domain
+   Actions → URL Forwarding** and clear any entry there, since that page is
+   separate from Manage DNS and overrides it.
+
+   Leave the nameservers alone. `ns1`-`ns4.name.com` is correct, and name.com
+   stays authoritative.
 
 CLI alternative: `npx vercel login`, then `npx vercel --prod` from the repo
 root. Nothing in the build is Vercel-specific, so any Node host that runs
