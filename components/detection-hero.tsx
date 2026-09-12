@@ -22,7 +22,7 @@ const BOX = { x: 0.19, y: 0.05, w: 0.62, h: 0.93 };
 
 export function DetectionHero() {
   return (
-    <div className="cv-panel relative h-full min-h-[22rem] w-full overflow-hidden rounded-xl border border-line bg-surface">
+    <div className="cv-panel relative h-full min-h-[14rem] w-full overflow-hidden rounded-xl border border-line bg-surface lg:min-h-[22rem]">
       <div className="absolute inset-0 flex items-center justify-center p-3">
         <div className="relative h-full max-w-full [aspect-ratio:1000/1038]">
           <Image

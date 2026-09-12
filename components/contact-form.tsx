@@ -16,7 +16,7 @@ import { mailto, site } from "@/lib/site";
 type State = "idle" | "sending" | "sent" | "error";
 
 const field =
-  "w-full rounded-lg border border-line bg-ink/50 px-3.5 py-2.5 text-[15px] text-text placeholder:text-muted/70 focus:border-primary focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-strong";
+  "w-full rounded-lg border border-line bg-ink/50 px-3.5 py-3 text-[16px] text-text sm:py-2.5 sm:text-[15px] placeholder:text-muted/70 focus:border-primary focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-signal-strong";
 
 export function ContactForm() {
   const [state, setState] = useState<State>("idle");
@@ -112,13 +112,13 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={state === "sending"}
-          className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-signal px-6 py-3.5 text-[13px] font-semibold uppercase leading-none tracking-[0.08em] text-signal-ink transition-colors duration-150 hover:bg-signal-hover active:bg-signal-active disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-signal"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-signal px-6 py-3.5 sm:min-h-11 sm:w-auto text-[13px] font-semibold uppercase leading-none tracking-[0.08em] text-signal-ink transition-colors duration-150 hover:bg-signal-hover active:bg-signal-active disabled:opacity-70 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-signal"
         >
           {state === "sending" ? "Sending…" : "Send message"}
         </button>
         <a
           href={mailto()}
-          className="text-[13px] font-medium text-muted transition-colors hover:text-text"
+          className="-my-3 py-3 text-[13px] font-medium text-muted transition-colors hover:text-text"
         >
           or email {site.email}
         </a>

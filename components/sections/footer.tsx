@@ -17,8 +17,8 @@ export function Footer() {
               {site.name}
             </p>
             <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
-              Computer vision systems, and the full-stack software around them, that run in
-              production on real hardware.
+              Full-stack software a business runs on, and the computer vision inside it when a
+              product needs to see.
             </p>
           </div>
 
@@ -31,7 +31,7 @@ export function Footer() {
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="text-[13px] font-medium text-muted transition-colors hover:text-text"
+                      className="-my-3 inline-block py-3 text-[13px] font-medium text-muted transition-colors hover:text-text"
                     >
                       {item.label}
                     </a>
@@ -43,7 +43,7 @@ export function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-[13px] font-medium text-muted transition-colors hover:text-text"
+                      className="-my-3 inline-block py-3 text-[13px] font-medium text-muted transition-colors hover:text-text"
                     >
                       {link.label}
                       <span className="sr-only">(opens in a new tab)</span>

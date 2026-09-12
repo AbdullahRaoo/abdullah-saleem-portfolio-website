@@ -14,11 +14,12 @@ import { site } from "@/lib/site";
  */
 export function About() {
   return (
-    <section id="about" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32">
+    <section id="about" className="mx-auto max-w-6xl scroll-mt-6 px-5 py-16 sm:px-8 sm:py-32">
       <SectionWire label="About" />
 
       <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
-        <Reveal className="lg:col-span-4">
+        {/* Desktop only: on a phone the portrait already filled the first screen. */}
+        <Reveal className="hidden lg:col-span-4 lg:block">
           <div className="relative aspect-[4/5] w-full max-w-xs overflow-hidden rounded-lg border border-line bg-surface lg:max-w-none">
             <Image
               src={site.photo}

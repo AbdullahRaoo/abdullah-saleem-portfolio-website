@@ -7,7 +7,7 @@ import { socialLinks } from "@/lib/site";
  */
 export function TrustStrip() {
   return (
-    <section aria-label="Profiles and proof" className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-24">
+    <section aria-label="Profiles and proof" className="mx-auto max-w-6xl px-5 pt-6 sm:px-8 sm:pt-24">
       <div className="flex flex-col gap-5 border-y border-line py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
         <p className="text-[13px] font-medium text-muted">
           Shipping software since 2022. Find me on:
@@ -20,7 +20,7 @@ export function TrustStrip() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-baseline gap-2 text-[13px] font-medium text-muted transition-colors hover:text-text"
+                className="group -my-3 flex items-baseline gap-2 py-3 text-[13px] font-medium text-muted transition-colors hover:text-text"
               >
                 <span className="text-text group-hover:text-text">{link.label}</span>
                 {link.note ? <span className="normal-case tracking-normal">{link.note}</span> : null}

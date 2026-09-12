@@ -4,21 +4,20 @@ import { mailto, site } from "@/lib/site";
 import { stats } from "@/lib/stats";
 
 /**
- * The introduction, deliberately placed after the console. The first viewport
- * is pure visual (detection + ERP); the words arrive once the visitor scrolls,
- * where they can be given room instead of competing with the panels. This holds
- * the page's h1 for SEO and structure.
+ * The introduction, deliberately placed after the console, where the words
+ * get room instead of competing with the panels. The page's h1 is the name in
+ * the hero; this headline is the first h2.
  */
 export function Intro() {
   return (
-    <section className="mx-auto max-w-6xl px-5 py-20 sm:px-8 sm:py-28">
+    <section className="mx-auto max-w-6xl px-5 py-14 sm:px-8 sm:py-28">
       <Reveal>
         <p className="eyebrow">Full-Stack Developer &amp; Computer Vision Engineer</p>
-        <h1 className="font-display mt-5 max-w-4xl text-[clamp(2.4rem,5.6vw,4.4rem)] font-extrabold leading-[1.0] tracking-tight text-text">
+        <h2 className="font-display mt-5 max-w-4xl text-[clamp(2.4rem,5.6vw,4.4rem)] font-extrabold leading-[1.0] tracking-tight text-text">
           I build the software a business{" "}
           <span className="text-signal-strong">actually runs on</span>.
-        </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-relaxed text-muted">
+        </h2>
+        <p className="mt-6 max-w-2xl text-[17px] leading-relaxed text-muted sm:text-lg">
           Admin platforms and ERP, B2B sites and storefronts, and the automation that removes the
           manual work between them. And when a product needs to see, I build the computer vision
           inside it: real-time detection that ships on real hardware, not a notebook.
@@ -33,7 +32,7 @@ export function Intro() {
 
       {/* Stat strip */}
       <Reveal delay={0.05}>
-        <dl className="mt-14 grid grid-cols-2 gap-x-6 gap-y-8 border-t border-line pt-8 sm:grid-cols-4">
+        <dl className="mt-10 grid sm:mt-14 grid-cols-2 gap-x-6 gap-y-8 border-t border-line pt-8 sm:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label}>
               <dt className="sr-only">{stat.label}</dt>

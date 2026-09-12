@@ -85,3 +85,32 @@
     it, which is the case the classifier has to get right.
   * UAV -> Picture1 (terrain + MOT tracking lock + detection log). The ground
     control station moved into the gallery.
+
+2026-09-13 | Mobile pass (measured on the live site at 375x812 first)
+Found:
+- Floating nav 439px wide in a 375px viewport, clipped both sides.
+- After the intro the first screen was the portrait alone: name ghosted to 10%,
+  scroll cue desktop-only. First readable sentence at 1,381px, behind a 569px
+  mobile copy of the dashboard that repeated the stats the Intro shows again.
+- Page scroll locked ~7s during the intro. A swipe that does nothing reads as
+  a broken page on a phone.
+- Inputs at 15px, so iOS Safari zoomed on focus.
+- 14,899px page. Work 5,185px stacked, portrait shown twice.
+- 24 tap targets under 44px. Two h1s. scroll-padding-top sized for a top nav
+  that no longer exists.
+Changed (desktop geometry verified identical to the pixel at 1440x900):
+- Nav below sm: back-to-top, theme, menu, CTA. Links move to a sheet above the
+  bar (48px rows, Escape and outside-tap close it, focus returns to the button).
+- Phone hero: name and role stay in flow and crisp above the portrait, no
+  recede, no dock, shorter hold, no scroll lock. Breathing scroll cue centred
+  under the portrait, 26px clear of the nav at both 375 and 320.
+- Mobile dashboard copy removed. About portrait desktop-only.
+- Work and testimonials become native overflow + snap rows below md: 85% cards
+  so the next one peeks 54px, plus a one-line swipe hint. No JS carousel.
+- Capabilities nodes in two columns on phones, wire from md.
+- Inputs 16px on phones, full-width submit, min-h-11 on every button, -my-3 py-3
+  hit areas on inline links so layout does not move.
+- Single h1 (the name). Intro headline is now an h2.
+- Footer blurb updated to the full-stack positioning it had missed.
+Result: 8,424px page (-43%), no horizontal overflow at 320 or 375, one tap
+target under 44px (the honeypot, which is hidden and untabbable).

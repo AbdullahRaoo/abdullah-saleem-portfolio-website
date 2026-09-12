@@ -17,7 +17,7 @@ export function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8 sm:py-24"
+      className="mx-auto max-w-6xl scroll-mt-6 px-5 py-16 sm:px-8 sm:py-24"
     >
       <SectionWire label="Client feedback" />
 
@@ -27,10 +27,14 @@ export function Testimonials() {
         </h2>
       </Reveal>
 
-      <div className="mt-12 grid gap-5 md:grid-cols-3">
-        {testimonials.map((t, i) => (
-          <Reveal key={t.project} delay={i * 0.06}>
-            <figure className="flex h-full flex-col rounded-xl border border-line bg-surface p-6">
+      <Reveal>
+        <ul
+          aria-label="Client quotes"
+          className="no-scrollbar -mx-5 mt-8 flex snap-x snap-mandatory scroll-px-5 gap-4 overflow-x-auto px-5 pb-2 md:mx-0 md:mt-12 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0"
+        >
+          {testimonials.map((t) => (
+            <li key={t.project} className="flex w-[85%] shrink-0 snap-start md:w-auto">
+            <figure className="flex h-full w-full flex-col rounded-xl border border-line bg-surface p-6">
               <span
                 aria-hidden="true"
                 className="font-display text-4xl font-extrabold leading-none text-line"
@@ -45,9 +49,10 @@ export function Testimonials() {
                 <span className="mt-0.5 block text-[13px] text-muted">{t.author}</span>
               </figcaption>
             </figure>
-          </Reveal>
-        ))}
-      </div>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
 
       <Reveal>
         <p className="mt-8 max-w-xl text-[13px] leading-relaxed text-muted">{site.proofNote}</p>

@@ -13,7 +13,7 @@ export function Capabilities() {
   return (
     <section
       id="capabilities"
-      className="mx-auto max-w-6xl scroll-mt-24 px-5 py-24 sm:px-8 sm:py-32"
+      className="mx-auto max-w-6xl scroll-mt-6 px-5 py-16 sm:px-8 sm:py-32"
     >
       <SectionWire label="Capabilities" />
 
@@ -33,7 +33,7 @@ export function Capabilities() {
         dead-level row. Three identical cards in a straight line is the single
         most template-looking layout there is.
       */}
-      <div className="mt-16 grid items-start gap-6 md:grid-cols-3">
+      <div className="mt-10 grid items-start gap-4 sm:mt-16 sm:gap-6 md:grid-cols-3">
         {capabilities.map((lane, laneIndex) => (
           <Reveal
             key={lane.id}
@@ -44,7 +44,7 @@ export function Capabilities() {
               <h3 className="font-display text-xl text-text">{lane.title}</h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted">{lane.summary}</p>
 
-              <ol className="mt-8">
+              <ol className="mt-5 grid grid-cols-2 gap-x-4 gap-y-3 md:mt-8 md:block">
                 {lane.nodes.map((node, i) => {
                   const isLast = i === lane.nodes.length - 1;
                   return (
@@ -57,7 +57,7 @@ export function Capabilities() {
                         <span className="font-medium text-[13px] text-muted">{node}</span>
                       </div>
                       {!isLast ? (
-                        <div className="ml-[3.5px] h-5 w-px bg-line" aria-hidden="true" />
+                        <div className="ml-[3.5px] hidden h-5 w-px bg-line md:block" aria-hidden="true" />
                       ) : null}
                     </li>
                   );

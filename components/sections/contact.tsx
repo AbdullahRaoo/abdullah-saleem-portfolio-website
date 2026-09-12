@@ -10,11 +10,11 @@ import { site, socialLinks } from "@/lib/site";
  */
 export function Contact() {
   return (
-    <section id="contact" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-20 sm:px-8 sm:py-28">
+    <section id="contact" className="mx-auto max-w-6xl scroll-mt-6 px-5 py-16 sm:px-8 sm:py-28">
       <SectionWire label="Contact" />
 
       <Reveal>
-        <div className="mt-10 grid gap-10 rounded-xl border border-line bg-surface p-7 sm:p-10 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:p-12">
+        <div className="mt-10 grid gap-10 rounded-xl border border-line bg-surface p-5 sm:p-10 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:p-12">
           <div>
             <h2 className="font-display text-[clamp(1.9rem,4vw,2.7rem)] font-bold leading-tight text-text">
               Need software built, or a system that has to see?
@@ -42,7 +42,7 @@ export function Contact() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[13px] font-medium text-muted transition-colors hover:text-text"
+                    className="-my-3 inline-block py-3 text-[13px] font-medium text-muted transition-colors hover:text-text"
                   >
                     {link.label} <span aria-hidden="true">&#8599;</span>
                     <span className="sr-only">(opens in a new tab)</span>

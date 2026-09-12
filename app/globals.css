@@ -97,8 +97,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    /* Nav is sticky; keep anchor targets clear of it. */
-    scroll-padding-top: 6rem;
+    /* The nav floats at the bottom now, not the top: a small top gap for
+       anchors, and a bottom gap so focused elements never hide behind the bar. */
+    scroll-padding-top: 1.5rem;
+    scroll-padding-bottom: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -272,4 +274,13 @@
 }
 .ci-scroll-dot {
   animation: ci-scroll-dot 1.9s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+}
+
+/* Horizontal scroll-snap rows (Work, testimonials on phones). The peeking next
+   card is the affordance, so the scrollbar is noise. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }

@@ -14,7 +14,7 @@ import type { ComponentPropsWithoutRef } from "react";
 // font's metrics, so the swap from fallback to Martian Mono cannot resize the
 // button and shove the page around. Web-font swap was the entire mobile CLS.
 const base =
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-[13px] font-semibold uppercase leading-none tracking-[0.08em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-signal";
+  "inline-flex min-h-11 items-center justify-center gap-2 whitespace-nowrap rounded-lg text-[13px] font-semibold uppercase leading-none tracking-[0.08em] transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-signal";
 
 const variants = {
   primary:
