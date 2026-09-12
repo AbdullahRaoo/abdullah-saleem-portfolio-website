@@ -35,16 +35,30 @@ Every page is prerendered; the only server route is `POST /api/contact`.
      shared test sender is used, which tends to land in spam.
 
    Redeploy after adding either one.
-3. **Domain** (Project → Settings → Domains): add `abdullahsaleem.dev` and
-   `www.abdullahsaleem.dev`, then at the registrar set
-   - apex `A` → `76.76.21.21`
-   - `www` `CNAME` → `cname.vercel-dns.com`
+3. **Domain** (Project → Settings → Domains): add `abdullahsaleem.dev`. Vercel
+   prompts for `www.abdullahsaleem.dev` too, add both, and pick one as the
+   redirect target. Vercel's own recommendation is `www` as the canonical host
+   (an apex cannot be a CNAME, so `www` keeps their routing flexible); the apex
+   is also fine. What matters is that `site.url` in `lib/site.ts` matches the
+   one you pick, because it drives the canonical tags, OG URLs, `robots.txt`
+   and the sitemap. It is currently `https://abdullahsaleem.dev`.
 
-   Vercel issues the certificate once those resolve. Point `www` at the apex as
-   the redirect, not the other way round: `site.url` in `lib/site.ts` is
-   `https://abdullahsaleem.dev`, and that value drives the canonical tags, OG
-   URLs, `robots.txt` and the sitemap. If the canonical host ever changes,
-   change that line too.
+   Then set the records at name.com (**My Domains → abdullahsaleem.dev →
+   Manage DNS Records**). Read the exact values off Vercel's domain card rather
+   than copying them from here: the apex A record is usually `76.76.21.21`, but
+   the `www` CNAME target is **per project** (something like
+   `d1d4fc829fe7bc7c.vercel-dns-017.com`), not a shared hostname.
+
+   | Type | Host | Answer |
+   |---|---|---|
+   | A | *(blank)* | the IP on Vercel's domain card |
+   | CNAME | `www` | the per-project target on Vercel's domain card |
+
+   **Delete the A record name.com ships by default first.** The apex currently
+   points at `91.195.240.94`, a name.com parking page. Leaving it in place
+   gives the apex two conflicting A records and Vercel will report an invalid
+   configuration. Check that name.com URL forwarding is off for the apex too,
+   since it overrides DNS.
 
 CLI alternative: `npx vercel login`, then `npx vercel --prod` from the repo
 root. Nothing in the build is Vercel-specific, so any Node host that runs
