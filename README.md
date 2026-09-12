@@ -41,7 +41,9 @@ Every page is prerendered; the only server route is `POST /api/contact`.
    (an apex cannot be a CNAME, so `www` keeps their routing flexible); the apex
    is also fine. What matters is that `site.url` in `lib/site.ts` matches the
    one you pick, because it drives the canonical tags, OG URLs, `robots.txt`
-   and the sitemap. It is currently `https://abdullahsaleem.dev`.
+   and the sitemap. It is set to `https://www.abdullahsaleem.dev`, matching the
+   308 redirect configured in Vercel (apex → www). Reverse that redirect and
+   this line has to move with it.
 
    Then set the records at name.com (**My Domains → abdullahsaleem.dev →
    Manage DNS Records**). Read the exact values off Vercel's domain card rather

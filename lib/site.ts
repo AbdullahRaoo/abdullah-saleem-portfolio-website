@@ -8,7 +8,16 @@
 export const site = {
   name: "Abdullah Saleem",
   role: "Full-Stack Developer & Computer Vision Engineer",
-  url: "https://abdullahsaleem.dev",
+  /**
+   * The canonical host, and the one value that decides what goes in the
+   * canonical tags, OG URLs, robots.txt and the sitemap.
+   *
+   * www, not the apex: the apex is configured in Vercel as a 308 redirect to
+   * www, so pointing canonical at the apex would aim every canonical tag at a
+   * URL that immediately redirects. If that redirect is ever reversed, this
+   * line has to move with it.
+   */
+  url: "https://www.abdullahsaleem.dev",
   email: "hi@abdullahsaleem.dev",
   emailFallback: "abdullahsaleem75911@gmail.com",
 
