@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Chivo, Libre_Franklin, Martian_Mono } from "next/font/google";
+import { Bricolage_Grotesque, DM_Mono, Hanken_Grotesk } from "next/font/google";
 
 import { ThemeScript } from "@/components/theme-script";
 import { site } from "@/lib/site";
@@ -7,41 +7,38 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
- * Type system, chosen to avoid the Inter / JetBrains Mono / Clash Display stack
- * that reads instantly as a template.
+ * Type system: bulky but elegant.
  *
- * Chivo: a sturdy grotesque with real weight at display sizes.
- * Libre Franklin: an American gothic body face, journalistic and credible.
- * Martian Mono: the label voice. Wide and engineered, so it is used small and
- * with restrained tracking (its natural width does the work instead).
+ * Bricolage Grotesque: a chunky, high-character display grotesque that carries
+ * real weight at large sizes without reading clunky. It is the personality of
+ * the site and deliberately not any of the template defaults (Inter, Geist,
+ * Space Grotesque) or the two prior rejected stacks.
+ * Hanken Grotesk: a clean, humanist body face, quiet next to the display.
+ * DM Mono: reserved strictly for real data (HUD numbers, tags, counters), used
+ * sparingly, never on eyebrows or labels, so the page stops feeling like a
+ * terminal.
  *
- * `display: "optional"` rather than "swap", deliberately. With swap, the
- * headline and subhead re-wrap when the real faces arrive and shove the stat
- * strip down: that single reflow was the whole of the mobile CLS (0.115, over
- * the 0.1 budget). Optional keeps the ~100ms block window, uses the font when
- * it arrives in time (same-origin and preloaded, so nearly always), and
- * otherwise renders this page view in next/font's metric-matched fallback and
- * picks up the real face from cache on the next navigation. Zero shift, and no
- * invisible text.
+ * `display: "optional"` so a late font swap can never re-wrap the headline and
+ * shift layout (that was the whole of the earlier mobile CLS).
  */
-const chivo = Chivo({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["600", "700"],
-  variable: "--font-chivo",
+  weight: ["600", "700", "800"],
+  variable: "--font-bricolage",
   display: "optional",
 });
 
-const libreFranklin = Libre_Franklin({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
-  weight: ["400", "500"],
-  variable: "--font-libre-franklin",
+  weight: ["400", "500", "600"],
+  variable: "--font-hanken",
   display: "optional",
 });
 
-const martianMono = Martian_Mono({
+const dmMono = DM_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
-  variable: "--font-martian-mono",
+  variable: "--font-dm-mono",
   display: "optional",
 });
 
@@ -50,14 +47,17 @@ export const metadata: Metadata = {
   title: site.title,
   description: site.description,
   keywords: [
-    "AI Engineer",
     "Full-Stack Developer",
-    "AI automation",
-    "n8n",
-    "LangChain",
-    "RAG chatbot",
     "Next.js developer",
-    "computer vision",
+    "React developer",
+    "ERP development",
+    "admin dashboard development",
+    "Computer Vision Engineer",
+    "real-time computer vision",
+    "edge AI",
+    "YOLO",
+    "ONNX",
+    "workflow automation",
     "Abdullah Saleem",
   ],
   authors: [{ name: site.name, url: site.url }],
@@ -85,8 +85,8 @@ export const metadata: Metadata = {
 
 export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0B0D12" },
-    { media: "(prefers-color-scheme: light)", color: "#F5F6F8" },
+    { media: "(prefers-color-scheme: dark)", color: "#080E11" },
+    { media: "(prefers-color-scheme: light)", color: "#F1FBFF" },
   ],
 };
 
@@ -97,7 +97,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${libreFranklin.variable} ${martianMono.variable} ${chivo.variable}`}
+      className={`${hanken.variable} ${dmMono.variable} ${bricolage.variable}`}
     >
       <head>
         <ThemeScript />
@@ -108,7 +108,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           blank the page.
         */}
         <noscript>
-          <style>{`[data-reveal]{opacity:1!important;transform:none!important}`}</style>
+          <style>{`[data-reveal]{opacity:1!important;transform:none!important}.ci-name,.ci-role,.ci-det,.ci-erp,.det-box,.det-label{opacity:1!important;visibility:visible!important;transform:none!important;clip-path:none!important;filter:none!important}`}</style>
         </noscript>
       </head>
       <body>

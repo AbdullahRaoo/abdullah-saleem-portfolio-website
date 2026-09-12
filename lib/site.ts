@@ -7,37 +7,41 @@
  */
 export const site = {
   name: "Abdullah Saleem",
-  role: "AI Engineer & Full-Stack Developer",
+  role: "Full-Stack Developer & Computer Vision Engineer",
   url: "https://abdullahsaleem.dev",
   email: "hi@abdullahsaleem.dev",
   emailFallback: "abdullahsaleem75911@gmail.com",
 
-  title: "Abdullah Saleem — AI Engineer & Full-Stack Developer",
+  title: "Abdullah Saleem · Full-Stack Developer & Computer Vision Engineer",
   description:
-    "I build AI systems that do the work: agents, automations and RAG chatbots, backed by full-stack delivery. 4+ years, 120+ projects shipped, 80+ clients.",
+    "I build the software a business runs on: ERP and admin platforms, B2B sites, storefronts and the automation between them. And when a product needs to see, I build the computer vision inside it, real-time detection that ships on real hardware.",
 
   /** The one primary action. Same label, same target, every time it appears. */
   cta: {
-    label: "Start a project",
-    subject: "Project enquiry",
+    label: "Get in touch",
+    subject: "Let's talk",
   },
 
   /**
-   * Portrait. Hiring an individual is a trust decision about a person, so the
-   * face does more work here than any other single asset.
-   *
-   * Currently a labelled placeholder. To use the real headshot: save it as
-   * public/abdullah-source.png, run `npm run photo` (chroma-keys the backdrop
-   * out to transparency), then point this at "/abdullah.png".
+   * Portrait, used as the subject of the detection hero and in About. The cut-out
+   * transparent WebP is generated from the source SVG by scripts/prepare-cv-photo.mjs
+   * (`npm run photo:cv`).
    */
-  photo: "/abdullah.jpg",
+  photo: "/abdullah-cv.webp",
+
+  /**
+   * Optional CV/resume. Null hides every "Resume" link on the site (same pattern
+   * as the optional social links). Drop a PDF in /public and set the path.
+   * TODO(abdullah): add e.g. "/abdullah-saleem-cv.pdf".
+   */
+  resumeUrl: null as string | null,
 
   /**
    * Shown beside the contact CTA to reduce hesitation at the moment of action.
    * Only true statements belong here. Edit or empty these if they stop holding.
    */
-  availability: "Taking on new projects",
-  responseTime: "Usually replies within a day",
+  availability: "Open to full-stack and computer vision engineering roles (remote or Islamabad), and to select freelance work.",
+  responseTime: "I usually reply within a day.",
 
   /**
    * Honest provenance for the client quotes. They were given for work delivered
@@ -46,9 +50,9 @@ export const site = {
   proofNote: "Client feedback on work I delivered, solo and through my agency, Croge.",
 
   nav: [
-    { label: "Work", href: "#work" },
-    { label: "Capabilities", href: "#capabilities" },
-    { label: "About", href: "#about" },
+    { label: "Work", href: "/#work" },
+    { label: "Capabilities", href: "/#capabilities" },
+    { label: "About", href: "/#about" },
   ],
 
   /**
@@ -63,13 +67,6 @@ export const site = {
     upwork: null as string | null,
   },
 
-  /** Mono stat strip under the hero. Proof before the visitor has to scroll. */
-  stats: [
-    { value: "4+", label: "Years" },
-    { value: "120+", label: "Projects" },
-    { value: "80+", label: "Clients" },
-    { value: "Level 2", label: "Fiverr Seller" },
-  ],
 } as const;
 
 export type SocialLink = { label: string; href: string; note?: string };

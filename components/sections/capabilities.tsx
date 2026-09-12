@@ -22,8 +22,9 @@ export function Capabilities() {
           Three lanes, one pipeline.
         </h2>
         <p className="mt-5 max-w-xl text-muted">
-          Most AI work fails at the seam between the model and everything else. I own the whole
-          run: the reasoning, the app around it, and the infrastructure it lands on.
+          Most projects fail at the seams: between the product and the model, or between the
+          software and the box it has to run on. I own the whole run, which is why nothing gets
+          handed over half-finished.
         </p>
       </Reveal>
 
@@ -53,7 +54,7 @@ export function Capabilities() {
                           className="size-2 shrink-0 rounded-full border border-line bg-ink"
                           aria-hidden="true"
                         />
-                        <span className="font-mono text-[13px] text-muted">{node}</span>
+                        <span className="font-medium text-[13px] text-muted">{node}</span>
                       </div>
                       {!isLast ? (
                         <div className="ml-[3.5px] h-5 w-px bg-line" aria-hidden="true" />

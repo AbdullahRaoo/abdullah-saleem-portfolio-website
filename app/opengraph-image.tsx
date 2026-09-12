@@ -6,15 +6,16 @@ export const alt = site.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-const INK = "#0B0D12";
-const LINE = "#232A38";
-const TEXT = "#ECEFF4";
-const MUTED = "#8B94A6";
-const SIGNAL = "#D2A24C";
+const INK = "#080E11";
+const LINE = "#1E2528";
+const TEXT = "#E6F5FB";
+const MUTED = "#8FA3AB";
+const SIGNAL = "#E77E4C";
 
 /**
- * Share card. Same rules as the site: cool ink, one amber node, no decoration.
- * Built with inline styles because Satori (next/og) does not read the app's CSS.
+ * Share card. Same rules as the site: cool teal-graphite ground, one warm
+ * signal node, no decoration. Built with inline styles because Satori
+ * (next/og) does not read the app's CSS.
  */
 export default function OpengraphImage() {
   return new ImageResponse(
@@ -40,7 +41,7 @@ export default function OpengraphImage() {
             color: MUTED,
           }}
         >
-          AI Engineer / Full-Stack Developer
+          Full-Stack Developer / Computer Vision Engineer
         </div>
 
         <div style={{ display: "flex", flexDirection: "column" }}>
@@ -54,8 +55,8 @@ export default function OpengraphImage() {
               letterSpacing: -2,
             }}
           >
-            <span style={{ marginRight: 18 }}>I build AI systems that</span>
-            <span style={{ color: SIGNAL }}>do the work.</span>
+            <span style={{ marginRight: 18 }}>I build the software a business</span>
+            <span style={{ color: SIGNAL }}>actually runs on.</span>
           </div>
 
           {/* The node motif, flattened to a single wire. */}
@@ -79,7 +80,7 @@ export default function OpengraphImage() {
           }}
         >
           <span style={{ color: TEXT, letterSpacing: 3 }}>ABDULLAH SALEEM</span>
-          <span>4+ yrs · 120+ projects · 80+ clients · Level 2 Fiverr</span>
+          <span>Real-time · Edge · YOLO / ONNX · 3+ yrs CV, 4+ yrs full-stack</span>
         </div>
       </div>
     ),

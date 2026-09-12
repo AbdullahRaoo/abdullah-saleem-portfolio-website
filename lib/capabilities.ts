@@ -3,6 +3,9 @@
  * wire with its tools as nodes along it, so the skills read as a system that
  * flows rather than a wall of badges.
  *
+ * Full-stack leads because most of the shipped work is full-stack. Computer
+ * vision sits second as the differentiator rather than the whole practice.
+ *
  * Everything listed here is drawn from work that actually shipped.
  */
 export type Lane = {
@@ -14,24 +17,24 @@ export type Lane = {
 
 export const capabilities: Lane[] = [
   {
-    id: "ai-automation",
-    title: "AI & Automation",
+    id: "full-stack-systems",
+    title: "Full-Stack & Product",
     summary:
-      "Agents that read, decide and act across your stack. LLM reasoning where it adds value, deterministic logic where it has to be exact, and an audit trail throughout.",
-    nodes: ["LangChain", "n8n", "RAG + pgvector", "OpenAI / Anthropic", "Agents & tool-use", "Python"],
+      "The software a team runs the business on: admin platforms and ERP, B2B catalogs and quote flows, storefronts, dashboards and internal tools. Built to be handed over and extended, not demoed once.",
+    nodes: ["Next.js", "React", "TypeScript", "Supabase / PostgreSQL", "Laravel", "Tailwind"],
   },
   {
-    id: "full-stack",
-    title: "Full-Stack",
+    id: "vision-edge",
+    title: "Computer Vision & Edge AI",
     summary:
-      "Authenticated platforms, admin panels and storefronts. Not landing pages: products your team can extend long after I hand them over.",
-    nodes: ["Next.js", "React", "TypeScript", "Supabase", "PostgreSQL", "Laravel"],
+      "Detection and tracking that has to hit frame-rate on constrained hardware. Training and data through to quantized models running on the device itself, not a round-trip to a server.",
+    nodes: ["YOLO / YOLOv8", "PyTorch", "OpenCV", "ONNX", "TensorRT", "Jetson / Raspberry Pi"],
   },
   {
-    id: "cloud-deployment",
-    title: "Cloud & Deployment",
+    id: "automation-deploy",
+    title: "Automation & Deployment",
     summary:
-      "The part that decides whether a system survives contact with real traffic. Containers, load balancing, observability and failure alerting.",
-    nodes: ["Docker", "AWS", "Kubernetes", "nginx", "Redis", "Vercel"],
+      "The plumbing that removes manual work and keeps things running unattended: inbound-to-CRM pipelines, LLM routing, containers, and the infrastructure underneath.",
+    nodes: ["n8n", "LLM routing", "Docker", "ROS 2", "nginx / Redis", "AWS / Vercel"],
   },
 ];

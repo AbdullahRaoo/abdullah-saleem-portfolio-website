@@ -1,9 +1,11 @@
-import { MobileCta, Nav } from "@/components/nav";
+import { FloatingNav } from "@/components/nav";
 import { About } from "@/components/sections/about";
 import { Capabilities } from "@/components/sections/capabilities";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { Hero } from "@/components/sections/hero";
+import { Intro } from "@/components/sections/intro";
+import { Testimonials } from "@/components/sections/testimonials";
 import { TrustStrip } from "@/components/sections/trust-strip";
 import { Work } from "@/components/sections/work";
 import { site, socialLinks } from "@/lib/site";
@@ -19,13 +21,19 @@ const personSchema = {
   description: site.description,
   sameAs: socialLinks().map((l) => l.href),
   knowsAbout: [
-    "AI automation",
-    "LangChain",
-    "n8n",
-    "Retrieval-augmented generation",
-    "Computer vision",
-    "Next.js",
     "Full-stack development",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "ERP and admin platforms",
+    "E-commerce",
+    "Workflow automation",
+    "Computer vision",
+    "Real-time object detection",
+    "YOLO",
+    "PyTorch",
+    "ONNX",
+    "Edge AI",
   ],
 };
 
@@ -38,20 +46,20 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
 
-      <Nav />
+      <FloatingNav />
 
       <main id="main">
         <Hero />
+        <Intro />
         <TrustStrip />
         <Work />
+        <Testimonials />
         <Capabilities />
         <About />
         <Contact />
       </main>
 
       <Footer />
-
-      <MobileCta />
     </>
   );
 }

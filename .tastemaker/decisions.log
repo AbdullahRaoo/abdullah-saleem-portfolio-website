@@ -1,0 +1,87 @@
+2026-09-11 | kept | axis=direction | surface=whole-site | Vision Console identity (dark-first instrument aesthetic, teal-graphite + one reserved orange signal, Archivo/IBM Plex Sans/IBM Plex Mono). User approved the rendered hero direction before full build.
+2026-09-11 | kept | axis=signal-color | surface=whole-site | Warm orange reserved signal over the cyan alternate (seed 47); warm-on-cool gives the CTA more pop and ties to industrial machine-vision inspection.
+2026-09-11 | kept | axis=signature | surface=hero | "Inspection viewport" chosen over the previous detection-box hero: folds detection boxes + pipeline schematic + telemetry into one console.
+2026-09-11 | pending-review | axis=density | surface=hero | Console packs boxes + pipeline strip + HUD. Watch whether it reads busy on small mobile; revisit if so.
+
+2026-09-12 | Verification round: archive, case studies, contact form, testimonials
+- Em dashes removed from every page title and metadata string (` — ` -> ` · `,
+  U+00B7). anti_slop_scan now clean of HIGH findings.
+- Two MEDIUM findings accepted, not "fixed":
+  * lib/testimonials.ts:40 "seamless" is inside a verbatim client quote. Rewording
+    a real quote to satisfy a linter would be dishonest. Left as written.
+  * scripts/prepare-photo.mjs:45 "robust" is a code comment, not shipped copy.
+- lib/projects.ts: "a robust, modern site" -> "a fast, catalog-driven site"
+  (that one IS shipped copy).
+- /work heading order: project cards took an h3 directly under the page h1.
+  ProjectCard now takes headingLevel (2 on the archive index, 3 inside the home
+  section that already owns an h2). Accessibility 98 -> 100.
+- /work LCP was 3.1s with a 2.66s render delay: the page header sat inside
+  <Reveal>, so framer-motion shipped opacity:0 into the server HTML. Header is
+  now static (cards still reveal). Performance 93 -> 99, LCP 3.1s -> 2.1s.
+  Same class of bug as the home hero H1 fix. Rule: never wrap an LCP candidate
+  in a motion component whose initial state is invisible.
+- Capability id "deployment-robotics" renamed to "deployment-infra" to match the
+  visible title; robotics is off-message for the ERP/CV/web/automation focus.
+- Scroll cue geometry measured in the DOM at 1440x900: cue 1328-1401 x,
+  743-771 y; ERP panel right edge 1401; nav 460-965 x, 826-884 y. Clear of the
+  floating nav on both axes.
+
+2026-09-12 | Rebalance toward full-stack, three real project galleries
+- Positioning flipped to "Full-Stack Developer & Computer Vision Engineer".
+  Reason from Abdullah: the front of the site read as computer vision, but the
+  shipped work is mostly full-stack (platforms, business sites, e-commerce,
+  automation). CV is not suppressed, it is demoted from "the practice" to "the
+  differentiator". Touched: site.ts (role/title/description/availability),
+  intro h1 + eyebrow, about (rewritten), capabilities (full-stack lane moved
+  first), contact heading, work heading, /work copy, layout keywords,
+  page.tsx knowsAbout, opengraph-image, README.
+- site.stats moved to lib/stats.ts so the project count reads allWork.length
+  instead of a typed number that would silently rot.
+- Per-project `featured: true` replaced by an explicit FEATURED_ORDER slug list.
+  The home page now leads with a platform and alternates, which the boolean
+  could not express (it inherited array order), and a missing slug throws at
+  build rather than silently dropping a card.
+- New project: PPE Monitoring Vision System, from real screenshots. Both halves
+  are his (detection + the Next.js dashboard), which is exactly the pairing the
+  new positioning claims, so it sits second on the home page.
+  Honesty: the figures inside those dashboards are seeded demo data. The
+  headline metric stays qualitative ("Multi-site") and the gallery caption says
+  so outright rather than letting 1,247 workers read as a client number.
+- Real media replaced the schematic placeholders for UAV SAR and Virtual Try-On.
+  The UAV "81.8 FPS" is captioned as the simulation run, not promoted to the
+  headline metric, because it is not an on-aircraft figure.
+- The try-on source carries a "CROGE Engineering Studio" watermark band. Cropped
+  off in scripts/prepare-project-shots.mjs: it is the agency's mark, and on a
+  personal portfolio it reads as someone else's work.
+- Project type gained `gallery?: GalleryShot[]`, rendered only on the case-study
+  page under "Inside it". Every shot carries a caption; an uncaptioned
+  screenshot is decoration.
+- Scroll cue moved from under the dashboard into a reserved 36px flex rail to
+  its right, vertically centred, and now breathes (ci-cue-breathe, 2.8s).
+  The rail is a flex sibling, not an absolute overlay, so it cannot land on the
+  dashboard at any width. Measured settled at 1440x900: dashboard 541-1353,
+  rail 1365-1401 (12px gap), cue centred on the rail to the pixel.
+  Both cue keyframe sets end on the RESTING value, because the global
+  reduced-motion rule collapses animations to 0.001ms / 1 iteration and the
+  element settles on its 100% frame.
+
+2026-09-12 | Corrections from Abdullah
+- Robionix Industrial CV deleted: he confirmed it is the same work as MagicQC,
+  so it was the same project listed twice under two names. No testimonial was
+  mapped to it, so nothing was orphaned. The About paragraph that opened "At
+  Robionix..." now describes that work as MagicQC.
+- Virtual Try-On promoted into the slot Robionix held (third on the home page).
+- FEATURED_ORDER would have dropped to seven, which leaves a lone card on the
+  last row of a two-column grid. Added Palazzo del Benessere to make eight: it
+  is the only e-commerce entry in the featured set, so it widens the range
+  rather than repeating a category already represented.
+- Patient Lead Routing: the client is a hospital in Spain, not a generic
+  "healthcare administration group". Copy corrected, and the WhatsApp bot's
+  first touch is now described as happening in the patient's own language.
+- Lead images changed on his instruction:
+  * PPE -> site-1 (a fixed camera looking down a walkway). It reads as the
+    product, where site-2 reads as four people posing. site-2 moved into the
+    gallery, where its value is the man holding his hard hat instead of wearing
+    it, which is the case the classifier has to get right.
+  * UAV -> Picture1 (terrain + MOT tracking lock + detection log). The ground
+    control station moved into the gallery.

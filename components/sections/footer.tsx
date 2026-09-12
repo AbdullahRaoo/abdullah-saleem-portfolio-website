@@ -9,15 +9,16 @@ export function Footer() {
 
   return (
     <footer className="border-t border-line">
-      {/* Bottom padding clears the mobile sticky CTA bar, which is fixed. */}
-      <div className="mx-auto max-w-6xl px-5 pb-36 pt-14 sm:px-8 md:pb-14">
+      {/* Bottom padding clears the floating nav, which is fixed on all sizes. */}
+      <div className="mx-auto max-w-6xl px-5 pb-32 pt-14 sm:px-8">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.1em] text-text">
+            <p className="font-display text-sm font-bold tracking-tight text-text">
               {site.name}
             </p>
             <p className="mt-3 max-w-xs text-[15px] leading-relaxed text-muted">
-              AI systems, automations and full-stack platforms that run in production.
+              Computer vision systems, and the full-stack software around them, that run in
+              production on real hardware.
             </p>
           </div>
 
@@ -30,7 +31,7 @@ export function Footer() {
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="font-mono text-[11px] uppercase tracking-[0.07em] text-muted transition-colors hover:text-text"
+                      className="text-[13px] font-medium text-muted transition-colors hover:text-text"
                     >
                       {item.label}
                     </a>
@@ -42,7 +43,7 @@ export function Footer() {
                       href={link.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="font-mono text-[11px] uppercase tracking-[0.07em] text-muted transition-colors hover:text-text"
+                      className="text-[13px] font-medium text-muted transition-colors hover:text-text"
                     >
                       {link.label}
                       <span className="sr-only">(opens in a new tab)</span>
@@ -55,11 +56,8 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-2 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-mono text-[11px] text-muted">
+          <p className="text-[13px] text-muted">
             &copy; {year} {site.name}
-          </p>
-          <p className="font-mono text-[11px] text-muted">
-            Built with Next.js, deployed on Vercel.
           </p>
         </div>
       </div>

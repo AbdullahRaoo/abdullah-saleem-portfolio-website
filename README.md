@@ -1,8 +1,8 @@
 # Abdullah Saleem — Personal Portfolio
 
-A static Next.js 15 site positioning Abdullah Saleem as an AI engineer and full-stack developer who ships systems that run in production.
+A static Next.js 15 site positioning Abdullah Saleem as a **Full-Stack Developer and Computer Vision Engineer**. Full-stack leads because most of the shipped work is full-stack: admin platforms and ERP, B2B sites, storefronts and automation. Computer vision is the differentiator that sits alongside it, real-time detection deployed on real hardware, not the whole practice. Open to full-stack and CV roles, and select freelance.
 
-Separate from the croge agency site. Content was extracted from that repo and rewritten from agency voice ("we") into first person ("I"). The croge repo was read only, never modified.
+The hero is the centrepiece: a cinematic, self-playing opening where the name resolves, a detection box locks onto a real photo of Abdullah, and an ERP dashboard slides in beside it. It is the argument, not decoration: the CV model and the system built around it, shown before a word is read.
 
 ## Run it
 
@@ -37,69 +37,77 @@ After the first deploy:
 
 ## Before you go live
 
-Three things need you, not code.
+A few things need you, not code.
 
 | What | Where | Why |
 |---|---|---|
 | Email forwarding | `lib/site.ts` → `email` | The site mails `hi@abdullahsaleem.dev`. Set up the alias, or swap the line to `abdullahsaleem75911@gmail.com`. Until then the primary CTA goes nowhere. |
-| Your photo | `public/abdullah.jpg` | Currently a placeholder that literally says "replace with photo". See below. |
-| Upwork URL | `lib/site.ts` → `links.upwork` | It is `null`, so the link is filtered out everywhere rather than rendering dead. Set it and it appears in the trust strip, contact and footer. |
+| Résumé PDF (optional) | `lib/site.ts` → `resumeUrl` | `null`, so every "Résumé" link stays hidden. Drop a PDF in `/public` and set the path; a Résumé button then appears next to the contact CTA. High value for hiring managers. |
+| Upwork URL (optional) | `lib/site.ts` → `links.upwork` | `null`, so the link is filtered out rather than rendering dead. Set it and it appears in the trust strip, contact and footer. |
+| Real CV project metrics | `lib/projects.ts` | PPE Monitoring, Virtual Try-On and UAV SAR ship with truthful qualitative headlines ("Multi-site", "Real-time") and `TODO` comments for the hard numbers. Add real figures when cleared to share. |
 
-Also confirm these are still true, since they sit next to the CTA: `availability` ("Taking on new projects") and `responseTime` ("Usually replies within a day") in `lib/site.ts`.
+Also confirm these are true, since they sit next to the CTA: `availability` ("Open to CV / ML Engineer roles, remote or Islamabad-based") and `responseTime` ("Usually replies within a day") in `lib/site.ts`.
 
-### Adding your photo
+### The hero photo
 
-```bash
-# save the headshot as public/abdullah-source.png first
-npm run photo
-```
-
-This chroma-keys the flat backdrop to transparency, despills the edges so no colour fringe survives around the hair, trims and resizes to 900x1125. Tune with `--tolerance` and `--feather` if the cut is too tight or too loose:
+The detection hero and the About portrait both use `public/abdullah-cv.webp`, a transparent cut-out generated from the source headshot:
 
 ```bash
-npm run photo -- --tolerance 70 --feather 40
+npm run photo:cv     # assets/source/abdulllahimage.svg  ->  public/abdullah-cv.webp
 ```
 
-Then set `photo: "/abdullah.png"` in `lib/site.ts`.
+The source is not a plain photo: it is grayscale PNGs recombined through SVG `feColorMatrix` filters, so the script rasterizes it (filters and all), then keys out the teal disc in **HSV** (an RGB key punched holes in the navy suit, which sits close to teal in RGB space), despills the edge, and erodes a 2px alpha rim to remove the disc's anti-aliased ring. See `scripts/prepare-cv-photo.mjs`. To use a different source photo, replace the SVG (or adapt the script's input path) and re-run.
 
 ## Content
 
 | File | Holds |
 |---|---|
-| `lib/site.ts` | Identity, links, email, stats, CTA label, availability |
-| `lib/projects.ts` | The five case studies, plus RentMind as an excluded draft |
-| `lib/testimonials.ts` | Three real client quotes, verbatim |
+| `lib/site.ts` | Identity, links, email, `resumeUrl`, stats, CTA label, availability |
+| `lib/projects.ts` | Six case studies (CV first), plus RentMind as an excluded draft |
+| `lib/testimonials.ts` | Real client quotes, verbatim, keyed to the card they back |
 | `lib/capabilities.ts` | The three pipeline lanes |
 
-### RentMind
+### Selected Work
 
-`lib/projects.ts` carries a RentMind entry with `draft: true`, which excludes it from the page. The brief named it, but nothing about it exists in the croge repo, so there was no verified problem, build detail, outcome or screenshot to draw on and none was invented. Fill in the `TODO` fields and delete `draft` to publish it.
+The home page leads on eight, picked and ordered by `FEATURED_ORDER` at the bottom of `lib/projects.ts` rather than by array order: **Fenix Brokers** (full-stack B2B platform), **PPE Monitoring** (CV + dashboard), **Virtual Try-On** (VLM), **Animated Film Network** (full-stack), **MagicQC** (CV measurement), **Patient Lead Routing** (automation + CRM), **UAV Search & Rescue** (ROS 2 / edge), **Palazzo del Benessere** (e-commerce). A slug that names a missing project throws at build. Anything without a real screenshot falls back to a designed, labelled placeholder that renders its real pipeline (camera → model → logic → output).
+
+Every headline metric is either a hard number or a truthful qualitative label. Where a real number exists but is not yet in hand, the headline stays qualitative and a `TODO` marks it. Nothing is invented. RentMind stays `draft: true` (excluded) for the same reason.
 
 ### Testimonials
 
-Several croge testimonials name the agency by brand. Rewriting a client's words to say "Abdullah" would fabricate a quote, so those are excluded. The three that survive already say "they" or "the team" and appear here unedited, each attached to the case card whose metric it corroborates. `site.proofNote` discloses that the work was delivered through the agency.
+Several source testimonials name the agency by brand. Rewriting a client's words would fabricate a quote, so those are excluded. The survivors already say "they" or "the team" and appear unedited, each attached to the case card whose metric it corroborates. `site.proofNote` discloses the work was delivered through the agency.
+
+## shadcn / 21st.dev compatibility
+
+The repo follows the shadcn structure so components from shadcn or 21st.dev paste in cleanly:
+
+- `components/ui/*` is the alias target (`@/components/ui`). Keeping primitives there is what lets pasted components resolve their imports.
+- `lib/utils.ts` exports `cn` (clsx + tailwind-merge), which nearly every such component imports.
+- `components.json` is configured for Tailwind v4 (`"config": ""`, css-variables mode), so `npx shadcn@latest add <component>` works.
+
+Note: the Spline "Interactive 3D" component from the original request was deliberately **not** used. A 3D robot is off-message for computer vision, that exact scene is a common template tell, and `@splinetool/runtime` (~1MB+ JS from an external origin) would break the Lighthouse scores. The bespoke detection hero (`components/detection-hero.tsx`) demonstrates the actual skill instead.
 
 ## Design notes
 
-The one rule everything else serves: **exactly one warm colour on a cool page, spent only on actions.**
+The identity is the **Vision Console** (generated fresh with tastemaker, technical mood, seed 41). Full detail in [DESIGN.md](DESIGN.md) and the contrast contract in `.tastemaker/style-lock.md`. The one rule everything serves: **exactly one warm colour on a cool page, spent on actions.**
 
-- `--signal` (brass `#D2A24C`) is a *fill*: primary buttons, the active AI node in the graph. Never decorative.
-- `--signal-strong` is a *text* colour, and it differs by theme. Brass text on a near-white background is about 2.1:1 and fails WCAG AA outright, so light mode darkens it to a deep bronze (`#7A5312`, 6.3:1) while the button fill stays brass.
-- Client screenshots are bright, saturated light-mode UIs, and one is full-colour illustration. Untreated they out-shout the CTA and break the whole mechanic. The `--media-*` tokens darken and drain them in dark mode, and drain and veil them in light. Everything lifts on hover.
+- Cool teal-graphite structure (`primary #0a80a2`, `ink #080e11`) with one reserved warm signal: **orange** (`--signal`, `#e77e4c` dark / `#ba5620` light) for CTAs, the active detection box, and the single hero highlight word.
+- `--signal-strong` is the warm *text* colour and flips to the darker burnt orange in light so the highlight word still clears WCAG AA. `--signal-ink` (the label on the orange fill) is near-black in dark, white in light.
+- Light and dark are both first-class (`data-theme` on `<html>`, set before paint by `components/theme-script.tsx`, toggled from the nav). Client screenshots in Selected Work are darkened/drained in dark and drained/veiled in light via the `--media-*` tokens, so they never out-shout the CTA.
 
-The signature element is the hero's automation flow graph: a webhook and a WhatsApp message feed an n8n workflow, which calls an AI agent, which writes to a CRM, with a brass pulse riding the wire. The motif repeats as section dividers, as the capability lanes, and as the schematic on the two pipeline case cards that have no screenshot worth showing.
+The hero is a **cinematic full-screen opening** (details in [DESIGN.md](DESIGN.md)): the name and designation resolve, the portrait blooms into the centre and a single detection box locks onto it, then it docks left and the ERP dashboard slides in on the right at a 38/62 split. It plays automatically in about 7s; any scroll, click or keypress fast-forwards it, and it is skipped on repeat visits in the same session and under `prefers-reduced-motion`. Selected Work (`components/sections/work.tsx`) leads each card with a plain "what it is" line and a full, uncropped visual, real screenshot or a labelled placeholder, with depth in a "How it works" disclosure.
 
-Fonts are Chivo, Libre Franklin and Martian Mono. They are loaded `display: "optional"`, not `"swap"`: swapping re-wrapped the headline and shoved the stat strip down, which was the entire mobile CLS (0.115, over the 0.1 budget).
+Fonts are **Bricolage Grotesque** (display, bulky and characterful), **Hanken Grotesk** (body) and **DM Mono** (data only, kept off eyebrows/labels), chosen to avoid the template stacks. They load `display: "optional"`, so a font swap can never re-wrap the headline and shift layout.
 
-Motion is one orchestrated moment (the graph wiring itself, then pulsing) plus a single scroll reveal reused everywhere. The hero copy is deliberately *not* animated, because Framer Motion renders its initial state into the server HTML and that would ship the `<h1>` at `opacity:0`. `prefers-reduced-motion` freezes the pulse, holds the graph static and disables reveals.
+Motion respects `prefers-reduced-motion` via a global rule that zeroes all animation and transition durations; the hero settles to a static split. The hero copy is static (never animated) so the `<h1>` paints immediately.
 
 ## Measured
 
-Lighthouse against `npm start`, both presets:
+Lighthouse against `npm start`:
 
 | | Performance | Accessibility | Best practices | SEO | CLS |
 |---|---|---|---|---|---|
-| Mobile | 100 | 100 | 100 | 100 | 0 |
-| Desktop | 100 | 100 | 100 | 100 | 0 |
+| Desktop | 100 | 100 | 100 | 100 | 0.002 |
+| Mobile | 95 | 100 | 100 | 100 | 0 |
 
-Contrast was verified computationally in both themes, not by eye. Lowest ratio anywhere is 5.51:1 against a 4.5:1 requirement. No horizontal overflow at 360px.
+Mobile LCP is ~2.9s (the hero portrait, under Lighthouse's 4x CPU + slow-4G throttle; far faster on real networks). Contrast was verified computationally in both themes; the lowest ratio clears the 4.5:1 AA requirement. Anti-slop and motion scans (tastemaker) come back clean. No horizontal overflow at 360px.

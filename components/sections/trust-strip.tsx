@@ -9,8 +9,8 @@ export function TrustStrip() {
   return (
     <section aria-label="Profiles and proof" className="mx-auto max-w-6xl px-5 pt-20 sm:px-8 sm:pt-24">
       <div className="flex flex-col gap-5 border-y border-line py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8">
-        <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted">
-          80+ clients since 2021. Verify me anywhere:
+        <p className="text-[13px] font-medium text-muted">
+          Shipping software since 2022. Find me on:
         </p>
 
         <ul className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -20,7 +20,7 @@ export function TrustStrip() {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-baseline gap-2 font-mono text-[11px] uppercase tracking-[0.07em] text-muted transition-colors hover:text-text"
+                className="group flex items-baseline gap-2 text-[13px] font-medium text-muted transition-colors hover:text-text"
               >
                 <span className="text-text group-hover:text-text">{link.label}</span>
                 {link.note ? <span className="normal-case tracking-normal">{link.note}</span> : null}

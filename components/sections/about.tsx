@@ -9,8 +9,8 @@ import { site } from "@/lib/site";
  * work", then out of the way. Anything longer competes with the case studies,
  * which are the actual argument.
  *
- * The portrait earns its place: hiring a contractor is a decision about a
- * person, and a page with no face on it asks for trust without offering any.
+ * The portrait earns its place: hiring is a decision about a person, and a page
+ * with no face on it asks for trust without offering any.
  */
 export function About() {
   return (
@@ -25,7 +25,7 @@ export function About() {
               alt={`${site.name}, ${site.role}`}
               fill
               sizes="(min-width: 1024px) 30vw, 80vw"
-              className="object-cover grayscale-[0.35] contrast-[1.05]"
+              className="object-cover object-bottom grayscale-[0.35] contrast-[1.05]"
             />
           </div>
         </Reveal>
@@ -33,31 +33,37 @@ export function About() {
         <div className="lg:col-span-8">
           <Reveal>
             <h2 className="font-display text-[clamp(1.9rem,4vw,2.5rem)] leading-tight text-text">
-              I ship systems, not demos.
+              I ship products, not demos.
             </h2>
           </Reveal>
 
           <Reveal delay={0.08}>
             <div className="mt-7 space-y-5 text-muted">
               <p>
-                I am Abdullah Saleem, an AI engineer and full-stack developer. For four years I
-                have built the unglamorous half of AI: the retries, the error handling, the human
-                handover, the audit trail. That is the half that decides whether a system is still
-                running six months later.
+                I am Abdullah Saleem, a full-stack developer with about four years of shipped work
+                behind me. Most of what I build is the ordinary, load-bearing kind: admin platforms
+                and ERP, B2B catalogs and quote flows, e-commerce, internal tools, and the
+                automation that takes the retyping out of a team&rsquo;s week. Next.js, React and
+                TypeScript on the front, Supabase, Postgres, Laravel and n8n behind it.
               </p>
               <p>
-                My work splits cleanly. LLM reasoning goes where judgment is genuinely needed.
-                Deterministic logic goes everywhere it has to be exact. A garment measured to 0.2 cm
-                does not get an opinion from a language model, and a patient enquiry does not get
-                routed by a regular expression.
+                For about three of those years the work has also been computer vision, and that is
+                the part most developers do not do. Object detection and tracking that has to hold
+                frame-rate on constrained hardware (YOLO, PyTorch, OpenCV, ONNX, Jetson and
+                Raspberry Pi), from data and training through to Dockerized deployment.
               </p>
               <p>
-                I have delivered 120+ projects for 80+ clients, and I am a Level 2 seller on Fiverr.
-                Most of that work is quiet: automations that run in the background, pipelines nobody
-                thinks about, dashboards a manager checks once a week. That is the point.
+                On MagicQC I put an end-to-end industrial CV system into production: garment
+                measurement to 0.2 cm from a camera, with the desktop app operators use and the
+                cloud platform managers report from. On a PPE monitoring system I built both halves
+                again: per-worker hard-hat detection, and the multi-site dashboard a safety team
+                runs it from. That pairing is the pattern. The model is rarely the deliverable, the
+                product around it is.
               </p>
               <p className="text-text/90">
-                If an idea is not worth building, I will say so before you pay me to build it.
+                What makes me useful: I can take something from a blank repository to a running
+                product a team actually uses, and I am not stuck when the hard part turns out to be
+                a camera.
               </p>
             </div>
           </Reveal>
