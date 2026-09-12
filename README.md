@@ -1,4 +1,4 @@
-# Abdullah Saleem — Personal Portfolio
+# Abdullah Saleem, Personal Portfolio
 
 A static Next.js 15 site positioning Abdullah Saleem as a **Full-Stack Developer and Computer Vision Engineer**. Full-stack leads because most of the shipped work is full-stack: admin platforms and ERP, B2B sites, storefronts and automation. Computer vision is the differentiator that sits alongside it, real-time detection deployed on real hardware, not the whole practice. Open to full-stack and CV roles, and select freelance.
 
@@ -20,20 +20,35 @@ Do not run `npm run build` while `npm run dev` is live. They share `.next/` and 
 
 ## Deploy to Vercel
 
-The site is fully static (`○ (Static) prerendered as static content` for every route), so there is nothing to configure.
+Every page is prerendered; the only server route is `POST /api/contact`.
 
-```bash
-npm i -g vercel
-vercel               # preview
-vercel --prod        # production
-```
+1. **Import**: [vercel.com/new](https://vercel.com/new), pick
+   `AbdullahRaoo/abdullah-saleem-portfolio-website`. Framework detects as
+   Next.js. Leave every build setting alone.
+2. **Environment variables** (Project → Settings → Environment Variables),
+   names in `.env.example`:
+   - `RESEND_API_KEY` from [resend.com/api-keys](https://resend.com/api-keys).
+     Until it is set the contact form returns a clear 503 and the UI falls back
+     to the mailto link, so nothing is silently dropped, but nothing is
+     delivered either.
+   - `CONTACT_FROM` once a sender domain is verified on Resend. Without it the
+     shared test sender is used, which tends to land in spam.
 
-Or push to GitHub and import the repo at [vercel.com/new](https://vercel.com/new). Vercel detects Next.js; no build settings, no env vars.
+   Redeploy after adding either one.
+3. **Domain** (Project → Settings → Domains): add `abdullahsaleem.dev` and
+   `www.abdullahsaleem.dev`, then at the registrar set
+   - apex `A` → `76.76.21.21`
+   - `www` `CNAME` → `cname.vercel-dns.com`
 
-After the first deploy:
+   Vercel issues the certificate once those resolve. Point `www` at the apex as
+   the redirect, not the other way round: `site.url` in `lib/site.ts` is
+   `https://abdullahsaleem.dev`, and that value drives the canonical tags, OG
+   URLs, `robots.txt` and the sitemap. If the canonical host ever changes,
+   change that line too.
 
-1. Add `abdullahsaleem.dev` under **Project → Settings → Domains**.
-2. `lib/site.ts` sets `url: "https://abdullahsaleem.dev"`. It feeds the canonical tag, Open Graph URL, sitemap and JSON-LD, so update it if the domain changes.
+CLI alternative: `npx vercel login`, then `npx vercel --prod` from the repo
+root. Nothing in the build is Vercel-specific, so any Node host that runs
+`next build` and `next start` works as well.
 
 ## Before you go live
 
@@ -46,7 +61,7 @@ A few things need you, not code.
 | Upwork URL (optional) | `lib/site.ts` → `links.upwork` | `null`, so the link is filtered out rather than rendering dead. Set it and it appears in the trust strip, contact and footer. |
 | Real CV project metrics | `lib/projects.ts` | PPE Monitoring, Virtual Try-On and UAV SAR ship with truthful qualitative headlines ("Multi-site", "Real-time") and `TODO` comments for the hard numbers. Add real figures when cleared to share. |
 
-Also confirm these are true, since they sit next to the CTA: `availability` ("Open to CV / ML Engineer roles, remote or Islamabad-based") and `responseTime` ("Usually replies within a day") in `lib/site.ts`.
+Also confirm these are true, since they sit next to the CTA: `availability` ("Open to full-stack and computer vision engineering roles (remote or Islamabad), and to select freelance work.") and `responseTime` ("I usually reply within a day.") in `lib/site.ts`.
 
 ### The hero photo
 
