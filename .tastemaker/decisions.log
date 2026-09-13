@@ -114,3 +114,32 @@ Changed (desktop geometry verified identical to the pixel at 1440x900):
 - Footer blurb updated to the full-stack positioning it had missed.
 Result: 8,424px page (-43%), no horizontal overflow at 320 or 375, one tap
 target under 44px (the honeypot, which is hidden and untabbable).
+
+2026-09-13 | Footer redesign: real navigation columns + a cropped giant wordmark
+- Replaced the single row of afterthought links with three columns (Identity+CTA,
+  Navigate, Connect), each with an .eyebrow label, matching the labelling
+  convention already used by SectionWire elsewhere on the page.
+- Added a huge, cropped background wordmark of site.name as a closing signature
+  (the "trendy giant name in the footer" pattern). Implementation choices:
+  * `aria-hidden="true"` on the wrapper: the name is already the page's
+    accessible h1, so this is a repeat, not new information.
+  * A fixed-height, `overflow-hidden` band (h-[22vw], min 6rem, max 13rem) with
+    the text centered and cropped by its own container rather than by the
+    browser's edge, so the crop amount is stable across viewport heights.
+  * Opacity kept at 7% (`text-text/[0.07]`), theme-driven via the existing
+    color token so it inverts correctly in light mode.
+  * Never uses the reserved signal color: texture, not action.
+- Known, accepted Lighthouse finding: `color-contrast` flags that node (both
+  themes, both viewports), because axe evaluates rendered contrast regardless
+  of aria-hidden (aria-hidden removes it from the accessibility tree, not from
+  the visual contrast check). This is WCAG 1.4.3's own "incidental text"
+  exception: text that is purely decorative and conveys no information has no
+  contrast requirement. Getting to 3:1 would need ~45% opacity, which reads as
+  a second shouted headline, not a background mark, defeating the point.
+  Accepted deliberately rather than "fixed" by inflating the opacity, same
+  posture as the two pre-existing anti_slop_scan exceptions in this project.
+  Measured (dark theme, alpha -> contrast against #080e11): 7%->1.15, 30%->2.48,
+  ~45%+ needed to clear 3:1.
+- Tap targets: nav/social/back-to-top links use the same -my-3 py-3 hit-area
+  pattern established in the mobile pass, so footer matches the rest of the
+  page rather than introducing a fourth convention.
