@@ -56,7 +56,7 @@ export const site = {
    * Honest provenance for the client quotes. They were given for work delivered
    * through the agency, and the site says so rather than implying solo credit.
    */
-  proofNote: "Client feedback on work I delivered, solo and through my agency, Croge.",
+  proofNote: "Client feedback on work I delivered, solo and with a team.",
 
   nav: [
     { label: "Work", href: "/#work" },
