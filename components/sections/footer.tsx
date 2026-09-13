@@ -3,17 +3,23 @@ import { mailto, site, socialLinks } from "@/lib/site";
 
 /**
  * The closing section: one more CTA, real navigation instead of a single row
- * of afterthought links, and a huge cropped wordmark as a signature rather
- * than decoration.
+ * of afterthought links, and a huge wordmark as a signature rather than
+ * decoration.
  *
- * The big name is `aria-hidden` and purely visual. It sits in a fixed-height,
- * `overflow-hidden` band sized shorter than the glyphs it holds, so the type
- * is cropped by its own container rather than the browser edge (which would
- * shift with viewport height and could clip mid-letter inconsistently). It
- * never uses the reserved signal color: this is texture, not an action.
+ * The big name is `aria-hidden` and purely visual, so it never needs the full
+ * name the way the real h1 does: the first name alone reads better at this
+ * size (the full name ran wide and looked cramped, and at 1440px+ it was
+ * wide enough to clip its own first and last letters against the wrapper).
+ * `clamp()` keeps one font-size formula honest at every width instead of
+ * jumping between breakpoint values, and the container has no fixed height,
+ * so the glyphs are never clipped top or bottom either. `overflow-hidden` on
+ * the wrapper is a horizontal-only safety net, not load-bearing at any size
+ * that has actually been measured. Never the reserved signal color: this is
+ * texture, not an action.
  */
 export function Footer() {
   const year = new Date().getFullYear();
+  const firstName = site.name.split(" ")[0];
 
   return (
     <footer className="relative overflow-hidden border-t border-line">
@@ -69,14 +75,14 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Huge cropped wordmark. Decorative and non-interactive: screen readers
-          and search engines already have the name from the h1 above it. */}
+      {/* Huge wordmark. Decorative and non-interactive: screen readers and
+          search engines already have the full name from the h1 above it. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none relative mt-14 h-[22vw] max-h-52 min-h-24 select-none overflow-hidden sm:mt-16"
+        className="pointer-events-none mt-10 flex select-none justify-center overflow-hidden px-2 sm:mt-14"
       >
-        <p className="font-display absolute inset-x-0 top-1/2 -translate-y-[38%] whitespace-nowrap text-center text-[26vw] font-extrabold uppercase leading-none tracking-tighter text-text/[0.07] sm:text-[20vw] lg:text-[15vw]">
-          {site.name}
+        <p className="font-display whitespace-nowrap text-center text-[clamp(3rem,18vw,13rem)] font-extrabold uppercase leading-none tracking-tighter text-text/[0.07]">
+          {firstName}
         </p>
       </div>
 

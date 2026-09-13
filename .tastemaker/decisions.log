@@ -143,3 +143,27 @@ target under 44px (the honeypot, which is hidden and untabbable).
 - Tap targets: nav/social/back-to-top links use the same -my-3 py-3 hit-area
   pattern established in the mobile pass, so footer matches the rest of the
   page rather than introducing a fourth convention.
+
+2026-09-13 | Footer wordmark: first name only, and a real fix for the crop
+Feedback: "Abdullah Saleem" felt like it was "filling it extra", and the
+wordmark looked cut off at the bottom.
+- Text changed to the first name only (site.name.split(" ")[0]). It is
+  aria-hidden and purely decorative, so it never needed to repeat the full
+  name the way the real h1 does.
+- The real bug behind "cut off at the bottom": the wrapper had a fixed height
+  (h-[22vw], capped 6-13rem) shorter than the text's own line box, by design,
+  to get a "cropped signature" look. That container is gone. The wrapper is
+  now un-sized (height follows content), so the full glyph box always renders,
+  top and bottom, at every viewport.
+- Font-size changed from three breakpoint values (26/20/15vw) to one
+  `clamp(3rem, 18vw, 13rem)`. Reason found while testing the full name at
+  1440px before this change: 22vw with no width cap rendered "ABDULLAH SALEEM"
+  1617px wide inside a 1440px wrapper, so overflow-hidden was silently
+  clipping real letters off both the first and last character, not just
+  trimming whitespace. A single clamp scales identically at every breakpoint
+  (the vw-to-viewport ratio cancels out) and the 13rem ceiling stops it
+  growing without bound on ultrawide monitors.
+- Measured after the fix, no clipping and no page-level horizontal scroll at
+  375, 1440 or 1920px: text width stays inside the wrapper's box at all three.
+  208px is the effective font-size from 1440px up (clamp ceiling), 67.5px at
+  375px (18vw, floor not reached).
